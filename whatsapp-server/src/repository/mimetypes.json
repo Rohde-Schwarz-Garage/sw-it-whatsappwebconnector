@@ -1,0 +1,21 @@
+[
+    {"mimetype": "image/jpg", "extension": "jpg"},
+    {"mimetype": "image/jpeg", "extension": "jpeg"},
+    {"mimetype": "image/png", "extension": "png"},
+
+    {"mimetype": "audio/aac", "extension": "aac"},
+    {"mimetype": "audio/amr", "extension": "amr"},
+    {"mimetype": "audio/mpeg", "extension": "mp3"},
+    {"mimetype": "audio/mp4", "extension": "m4a"},
+    {"mimetype": "audio/ogg", "extension": "ogg"},
+
+    {"mimetype": "video/mp4", "extension": "mp4"},
+    {"mimetype": "video/3gp", "extension": "3gp"},
+
+    {"mimetype": "text/plain", "extension": "txt"},
+    {"mimetype": "application/pdf", "extension": "pdf"},
+    {"mimetype": "application/msword", "extension": "doc"},
+    {"mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "extension": "docx"},
+    {"mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "extension": "xlsx"},
+    {"mimetype": "application/vnd.openxmlformats-officedocument.presentationml.presentation", "extension": "pptx"}
+]

@@ -1,0 +1,18 @@
+{
+	"node": "whatsAppWebTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Communication"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "about:blank"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "about:blank"
+			}
+		]
+	}
+}

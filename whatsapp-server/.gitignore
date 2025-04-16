@@ -1,0 +1,8 @@
+.wwebjs_auth
+.wwebjs_cache
+node_modules
+build
+.env
+sessionAuth
+n8nwa.tar.gz
+media

@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": false,
+        "noEmitOnError": true,
+        "removeComments": false,
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "moduleResolution": "Node",
+        "sourceMap": true,
+        "target": "ESNext",
+        "outDir": "./build",
+        "strict": true,
+        "resolveJsonModule": true,
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

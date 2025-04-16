@@ -1,0 +1,21 @@
+[
+	"image/jpg",
+	"image/jpeg",
+	"image/png",
+
+	"audio/aac",
+	"audio/amr",
+	"audio/mpeg",
+	"audio/mp4",
+	"audio/ogg",
+
+	"video/mp4",
+	"video/3gp",
+
+	"text/plain",
+	"application/pdf",
+	"application/msword",
+	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+	"application/vnd.openxmlformats-officedocument.presentationml.presentation"
+]

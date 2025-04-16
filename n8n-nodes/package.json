@@ -1,0 +1,57 @@
+{
+  "name": "n8n-nodes-whatsappweb",
+  "version": "0.1.0",
+  "description": "n8n node to interact with a custom WhatsApp Web Server",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "homepage": "",
+  "author": {
+    "name": "test",
+    "email": "test@example.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.rsint.net/4PA-IT/core-applications/dynamic-enterprise-collaborative-ecosystem-for-processing-transformation-integration-and-coordinated-optimization-of-networked-systems/wweb-client.git"
+  },
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials package.json",
+    "lintfix": "eslint nodes credentials package.json --fix",
+    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/WhatsAppWebApi.credentials.ts"
+    ],
+    "nodes": [
+      "dist/nodes/WhatsAppWeb/WhatsAppWebTrigger.node.ts",
+      "dist/nodes/WhatsAppWeb/WhatsAppWebMessage.node.ts"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "gulp": "^4.0.2",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
