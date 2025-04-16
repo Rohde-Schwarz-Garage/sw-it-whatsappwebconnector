@@ -21,12 +21,14 @@ The `Send WhatsApp Web Message` node can be used to send messages as the WhatsAp
 ## 🔧 Setup
 ### WhatsApp Server 
 To run the `whatsapp-server` which handles the WhatsApp Web connection and the incoming and outgoing messages, you will need to build and start the docker image:
-1. Build the docker image
-    1. Change to the `whatsapp-server` directory
-    1. Run the following command to build the image
+> A pre-built version of the image can be found in the releases
+
+1. Install the docker image
+    1. Download the image from the latest release
+    1. Install the image by running the following command (Replace `x_y` with the correct version; e.g., `1_0`):
         ```sh
-        docker build -t decepticons/n8nwa:1.0-bookworm .
-        ```
+        docker image load -i n8nwa_image_x_y_bookworm.tar.gz
+        ``` 
 1. Create a volume to store the authentication data
     ```sh
     docker volume create n8nwa_auth_store
@@ -51,8 +53,10 @@ Scan that code with your phone running WhatsApp by tapping the three dots and go
 > The server can generally be left running. If it not used frequently, the qr code might need to be re-scanned every now and then.
 
 ### n8n
-To use the custom nodes in n8n, they needs to be copied into the correct folder inside the n8n data volume, since the node has not been published on npm. \
-A pre-compiled zip folder of the custom nodes can be found in the releases.
+To use the custom nodes in n8n, they needs to be copied into the correct folder inside the n8n data volume, since the node has not been published on npm.
+> A pre-compiled zip folder containing the custom nodes can be found in the releases.
+
+1. Download the zip folder from the latest release
 1. In the docker volume that contains n8ns data (mounted as `/home/node/.n8n`), create a new folder called `custom`
 1. Copy the contents of the zip folder into the newly created `custom` folder
 1. Restart n8n and the new nodes should be available
