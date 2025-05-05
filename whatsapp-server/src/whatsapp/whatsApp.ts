@@ -1,4 +1,4 @@
-import { Client, LocalAuth, Message, MessageContent, MessageSendOptions, WAState } from "whatsapp-web.js";
+import { Client, LocalAuth, Message, MessageContent, MessageSendOptions } from "whatsapp-web.js";
 import { config } from "../config/config";
 import { parseWhatsAppMessage as convertWhatsAppMessage, WhatsAppMessage } from "../model/message";
 import { MessagingCache } from "./messagingCache";
@@ -34,11 +34,6 @@ export class WhatsApp {
 
         this.client.on("message", this.handleMessage.bind(this));
         this.client.on("message_create", this.handleSelfMessage.bind(this));
-
-        // this.client.on("state_changed", (state: WAState) => console.log(state));
-        // this.client.on("auth_failure", (message: string) => console.log(message));
-        // this.client.on("loading_screen", (percent: number) => console.log(percent));
-        // this.client.on("disconnected", (reason: any) => console.log(reason));
     }
 
 
