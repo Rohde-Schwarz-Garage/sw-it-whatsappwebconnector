@@ -2,7 +2,7 @@ import { Client, LocalAuth, Message, MessageContent, MessageSendOptions } from "
 import { config } from "../config/config";
 import { parseWhatsAppMessage as convertWhatsAppMessage, WhatsAppMessage } from "../model/message";
 import { MessagingCache } from "./messagingCache";
-import { EventManager, WebhookMessageEvent } from "../repository/eventManager";
+import { EventManager, WebhookMessageEvent, WebhookSelfMessageEvent } from "../repository/eventManager";
 import MediaHandler from "../repository/mediaHandler";
 import qrcode from "qrcode-terminal";
 
@@ -30,8 +30,10 @@ export class WhatsApp {
         });
 
         this.client.on("ready", this.handleReady.bind(this));
-        this.client.on("message", this.handleMessage.bind(this));
         this.client.on("qr", (qr: any) => qrcode.generate(qr, { small: true }));
+
+        this.client.on("message", this.handleMessage.bind(this));
+        this.client.on("message_create", this.handleSelfMessage.bind(this));
     }
 
 
@@ -78,6 +80,34 @@ export class WhatsApp {
     private async handleMessage(msgTemp: Message) {
         const msg = await convertWhatsAppMessage(msgTemp, this.cache);
         const event = new WebhookMessageEvent(msg);
+        if (!msg.hasMedia) {
+            this.events.dispatchEvent(event);
+            return;
+        }
+
+        msg.media = {
+            saved: false,
+            fileLocation: "",
+            mimeType: "",
+        }
+
+        try {
+            const [fileName, mimeType] = await this.media.downloadMessageMedia(msgTemp);
+            msg.media.mimeType = mimeType;
+            msg.media.fileLocation = `/media/${fileName}`;
+            msg.media.saved = true;
+        } catch (error) {
+            console.error(`Failed to download media for message ${msg.id}: `, error);
+        } finally {
+            this.events.dispatchEvent(event);
+        }
+    }
+
+    private async handleSelfMessage(msgTemp: Message) {
+        if (!msgTemp.fromMe) return;
+
+        const msg = await convertWhatsAppMessage(msgTemp, this.cache);
+        const event = new WebhookSelfMessageEvent(msg);
         if (!msg.hasMedia) {
             this.events.dispatchEvent(event);
             return;
