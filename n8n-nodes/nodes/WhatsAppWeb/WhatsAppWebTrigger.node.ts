@@ -38,11 +38,16 @@ export class WhatsAppWebTrigger implements INodeType {
 				options: [
 					{
 						name: 'Message Received',
-						value: 'messageReceived',
+						value: 'message',
 						description: 'Triggered when a WhatsApp message is received',
+					},
+					{
+						name: 'Message Sent',
+						value: 'selfMessage',
+						description: 'Triggered when a WhatsApp message is sent by you',
 					}
 				],
-				default: 'messageReceived',
+				default: 'message',
 				required: true,
 				description: 'Event that this node listens to',
 			},
@@ -90,6 +95,10 @@ export class WhatsAppWebTrigger implements INodeType {
 
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
 		const body = this.getBodyData() as any;
+
+		const eventType = this.getNodeParameter('event', 'message');
+		if (body.type !== eventType) return {};
+
 		if (!body.data.hasMedia || !body.data.media.saved) {
 			return { workflowData: [this.helpers.returnJsonArray(body)] };
 		}

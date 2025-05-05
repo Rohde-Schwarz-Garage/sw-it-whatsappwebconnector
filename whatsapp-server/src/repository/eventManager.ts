@@ -24,6 +24,16 @@ export class WebhookMessageEvent implements WebhookEvent {
     }
 }
 
+export class WebhookSelfMessageEvent implements WebhookEvent {
+    public type = "selfMessage";
+    public data: WhatsAppMessage;
+
+
+    constructor(data: WhatsAppMessage) {
+        this.data = data;
+    }
+}
+
 
 // Event handling, do not touch
 /**
