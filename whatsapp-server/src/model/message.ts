@@ -143,7 +143,7 @@ export async function parseWhatsAppMessage(msg: Message, repo: MessagingCache): 
         isForwarded: msg.isForwarded,
         isStatus: msg.isStatus,
 
-        mentionedIds: (msg.mentionedIds || []).map(id => id._serialized),
+        mentionedIds: msg.mentionedIds || [],
         hasQuotedMsg: msg.hasQuotedMsg,
         quotedMsgId: (await msg.getQuotedMessage())?.id?._serialized || null, // getQuotedMessage returns undefined if hasQuotedMsg is false
 
