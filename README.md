@@ -18,6 +18,9 @@ After that the server starts receiving messages and is capable of sending new me
 In n8n the user can create `WhatsApp Web Trigger` nodes which register their webhooks with the whatsapp-server. Whenever a webhook is triggered, the node is triggered and starts the workflow with the message data and media (if it exists). \
 The `Send WhatsApp Web Message` node can be used to send messages as the WhatsApp client. They work by sending POST requests to the whatsapp-server
 
+> [!NOTE]
+> The whatsapp-web.js library needs to be updated periodically. Take a look [here](./docs/update-wwebjs.md) for a tutorial on updating it.
+
 ## 🔧 Setup
 ### WhatsApp Server 
 To run the `whatsapp-server` which handles the WhatsApp Web connection and the incoming and outgoing messages, you will need to build and start the docker image:
