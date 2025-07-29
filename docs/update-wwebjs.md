@@ -29,7 +29,28 @@ This guide outlines the full process of updating the library and releasing a new
 
 ## Test your changes
 
+1. Run `npm run build` to look for new errors caused by the version update
+1. If there are any errors, address them and try again
+1. Optionally run the server with `npm run dev` and test it for functionality
+
 ## Commit your changes
+
+1. After the version has been updated, commit your changes
+    ```bash
+    git add .
+    git commit -m "Updated whatsapp-web.js"
+    ```
+1. [Create a new pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+    - Request to pull changes from your branch into the main branch
+1. Merge the pull request once all checks have succeeded
+
 
 ## Release a new version
 
+1. Once the pull request has been merged, a docker image will be built automatically
+1. The image can be found under the repos [GitHub packages](https://github.com/Rohde-Schwarz-Garage/sw-it-whatsappwebconnector/pkgs/container/whatsapp-web-connector)
+1. Create a new release in GitHub, link to the correct package (`main`) and include what has changed. 
+    - Take a look at the existing releases for inspiration
+
+> [!NOTE]
+> The latest version of the image can be pulled using `docker pull ghcr.io/rohde-schwarz-garage/whatsapp-web-connector:main`
