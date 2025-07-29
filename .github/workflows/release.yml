@@ -1,0 +1,47 @@
+name: Build and attach n8n nodes
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        working-directory: n8n-nodes
+        run: pnpm install
+
+      - name: Build n8n nodes
+        working-directory: n8n-nodes
+        run: pnpm run build
+
+      - name: Check dist directory exists
+        working-directory: n8n-nodes
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "dist directory does not exist!"
+            exit 1
+          fi
+
+      - name: Package n8n nodes
+        working-directory: n8n-nodes
+        run: zip -r n8n-nodes.zip dist
+
+      - name: Upload n8n nodes to release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: n8n-nodes/n8n-nodes.zip
+          asset_name: n8n-nodes-${{ github.event.release.tag_name }}.zip
+          asset_content_type: application/zip
