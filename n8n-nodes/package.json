@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-whatsappweb",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "description": "n8n node to interact with a custom WhatsApp Web Server",
   "keywords": [
     "n8n-community-node-package"
