@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+          cache-dependency-path: n8n-nodes/pnpm-lock.yaml
 
       - name: Install dependencies
         working-directory: n8n-nodes
