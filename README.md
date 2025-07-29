@@ -18,24 +18,24 @@ After that the server starts receiving messages and is capable of sending new me
 In n8n the user can create `WhatsApp Web Trigger` nodes which register their webhooks with the whatsapp-server. Whenever a webhook is triggered, the node is triggered and starts the workflow with the message data and media (if it exists). \
 The `Send WhatsApp Web Message` node can be used to send messages as the WhatsApp client. They work by sending POST requests to the whatsapp-server
 
+> [!NOTE]
+> The whatsapp-web.js library needs to be updated periodically. Take a look [here](./docs/update-wwebjs.md) for a tutorial on updating it.
+
 ## 🔧 Setup
 ### WhatsApp Server 
-To run the `whatsapp-server` which handles the WhatsApp Web connection and the incoming and outgoing messages, you will need to build and start the docker image:
-> A pre-built version of the image can be found in the releases
+To run the `whatsapp-server` which handles the WhatsApp Web connection and the incoming and outgoing messages, you will need to pull and start the docker image:
 
-1. Install the docker image
-    1. Download the image from the latest release
-    1. Install the image by running the following command (Replace `x_y` with the correct version; e.g., `1_0`):
-        ```sh
-        docker image load -i n8nwa_image_x_y_bookworm.tar.gz
-        ``` 
+1. Install the docker image by running the following command:
+    ```sh
+    docker pull ghcr.io/rohde-schwarz-garage/whatsapp-web-connector:main
+    ``` 
 1. Create a volume to store the authentication data
     ```sh
     docker volume create n8nwa_auth_store
     ```
 1. Run the docker container
     ```sh
-    docker run --rm --name n8nwa -p 8080:8080 -v n8nwa_auth_store:/run/sessionAuth decepticons/n8nwa:1.0-bookworm
+    docker run --rm --name n8nwa -p 8080:8080 -v n8nwa_auth_store:/run/sessionAuth ghcr.io/rohde-schwarz-garage/whatsapp-web-connector:main
     ```
 
 Optionally there are the following environment variables available to configure the server:
@@ -50,7 +50,8 @@ FILE_CLEAR_INTERVAL_SECONDS=900     # The time in seconds after which temporary 
 After the container is run, it will print a qr code to the console every 3 minutes. \
 Scan that code with your phone running WhatsApp by tapping the three dots and going to `Linked devices -> Link a device`.
 
-> The server can generally be left running. If it not used frequently, the qr code might need to be re-scanned every now and then.
+> [!NOTE]
+> The server can generally be left running. If it is not being used frequently, the qr code might need to be re-scanned every now and then.
 
 ### n8n
 To use the custom nodes in n8n, they needs to be copied into the correct folder inside the n8n data volume, since the node has not been published on npm.
@@ -67,6 +68,7 @@ The WhatsAppWeb nodes use `WhatsApp Web API Credentials` which have the followin
 - `API URL`: The URL pointing to the `whatsapp-server` instance. Do not include trailing slashes and only use HTTP, not HTTPS!
 - `API Key` is not being used yet, just enter anything 
 
+> [!CAUTION]
 > It is important to have a firewall that prevents external users from accessing the n8nwa server!
 
 ## 🚀 Possible Improvements 
