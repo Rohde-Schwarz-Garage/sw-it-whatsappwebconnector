@@ -49,7 +49,7 @@ This guide outlines the full process of updating the library and releasing a new
 
 1. Once the pull request has been merged, a docker image will be built automatically
 1. The image can be found under the repos [GitHub packages](https://github.com/Rohde-Schwarz-Garage/sw-it-whatsappwebconnector/pkgs/container/whatsapp-web-connector)
-1. Create a new release in GitHub, link to the correct package (`main`) and include what has changed. 
+1. Create a [new release in GitHub](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release), link to the correct package (`main`) and include what has changed. 
     - Take a look at the existing releases for inspiration
 
 > [!NOTE]
